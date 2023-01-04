@@ -53,7 +53,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return response()->json($product);
     }
 
     /**
@@ -74,9 +75,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        //
+        $product = Product::find($id);
+        $product->update($request->all());
+
+        return response()->json('Successfully Updated Product');
     }
 
     /**
@@ -87,6 +91,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+
+        return response()->json('Successfully Deleted Data');
     }
 }
